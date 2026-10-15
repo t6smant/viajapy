@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#F97316" />
+    <title>viajaPY — Descubrí Paraguay</title>
+    <meta name="description" content="Inspiración, rutas y experiencias para descubrir Paraguay." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css?v=paraguay-palette" />
+    <style id="paraguay-palette">
+      :root { --ink:#17324a; --forest:#1A73E8; --deep:#1555a6; --lime:#FACC15; --cream:#fffaf0; --sand:#fff1dc; --muted:#5f6f7d; --line:rgba(26,115,232,.16); }
+      .brand > span:last-child > span, .auth-brand > span:last-child > span { color:#EF4444; }
+      .brand-mark span:nth-child(2) { background:#34D399; }
+      .brand-mark span:nth-child(3) { background:#FACC15; }
+      .hero::before { background:#1A73E8; }
+      .hero h1, .hero h1 .red-word { color:#FACC15; }
+      .hero h1 { color:white; }
+      .hero-description, .hero .eyebrow, .hero .play-btn, .hero-proof strong, .hero-proof small { color:#e8f1ff; }
+      .hero .primary-btn { color:#17324a; background:#FACC15; border-color:#FACC15; }
+      .hero .primary-btn:hover { color:#17324a; background:#34D399; border-color:#34D399; }
+      h1 em, h2 em, h3 em { color:#34D399; }
+      .search-icon { color:#1A73E8; background:#fff1b8; }
+      .search-btn { color:#17324a; background:#FACC15; }
+      .route-map { background:#1555a6; }
+      .map-grid { background-image:linear-gradient(rgba(250,204,21,.26) 1px, transparent 1px),linear-gradient(90deg, rgba(250,204,21,.26) 1px, transparent 1px); }
+      .newsletter { background:#F97316; }
+      .newsletter .eyebrow, .newsletter .eyebrow > span { color:#fff1b8; background:#fff1b8; }
+      .newsletter p:not(.eyebrow), .newsletter-form input::placeholder { color:#fff1dc; }
+      .reward-bar .reward-art { background:linear-gradient(135deg,#F97316,#EF4444); }
+      .reward-hotel .reward-art { background:linear-gradient(135deg,#1A73E8,#1555a6); }
+      .reward-food .reward-art { background:linear-gradient(135deg,#FACC15,#F97316); }
+      .reward-location { color:#fff1b8; }
+      .how-icon { color:#1555a6; background:#d7f8eb; }
+      .how-row small b, .rewards-note b { color:#1A73E8; }
+      .paraguay-map-wrap { background:#fff1dc; }
+      .country-base { fill:#ffe5b8; }
+      .region-unlocked, .unlocked-dot { fill:#34D399; background:#34D399; }
+      .region-locked, .locked-dot { fill:#d8dee8; background:#d8dee8; }
+      .map-route { stroke:#1A73E8; }
+      .map-route.soft { stroke:#94a9bd; }
+      .map-pin.unlocked circle:first-child { fill:#1A73E8; }
+      .map-pin .pin-core { fill:#FACC15; }
+      .map-next { background:#fff1b8; }
+      .map-next > span { color:#EF4444; }
+      .chatbot-pulse { background:#FACC15; }
+      .footer .heart { color:#EF4444; }
+    </style>
+    <style id="brand-redesign">
+      body { background:#fffaf0; }
+      .announcement { min-height:42px; border-bottom:3px solid #FACC15; background:#17324a; }
+      .announcement-link { padding:7px 13px; border-radius:999px; color:#17324a; background:#FACC15; font-weight:700; }
+      .site-header { position:relative; z-index:10; width:min(1190px,calc(100% - 40px)); height:92px; padding:0 20px; border:1px solid rgba(26,115,232,.12); border-top:0; border-radius:0 0 24px 24px; background:rgba(255,250,240,.94); box-shadow:0 12px 25px rgba(23,50,74,.07); }
+      .brand { font-size:23px; }
+      .brand-mark { width:32px; height:29px; }
+      .desktop-nav { gap:25px; margin-left:90px; }
+      .desktop-nav a { padding:9px 12px; border-radius:999px; }
+      .desktop-nav a:hover, .desktop-nav a.active { color:#17324a; background:#fff1b8; }
+      .desktop-nav a.active::after { display:none; }
+      .login-btn { border:0; border-radius:999px; color:#fff; background:#1A73E8; font-weight:700; }
+      .login-btn:hover { color:#17324a; background:#FACC15; border-color:transparent; }
+      .hero { min-height:570px; margin-top:24px; padding:65px 54px 62px; border-radius:34px; overflow:visible; }
+      .hero::before { inset:0; z-index:-1; border-radius:34px; background:#F97316; box-shadow:0 23px 45px rgba(249,115,22,.18); }
+      .hero-copy { position:relative; z-index:2; }
+      .hero .eyebrow { color:#fff1b8; }
+      .hero .eyebrow > span { background:#FACC15; }
+      .hero h1 { max-width:555px; color:#17324a; font-size:clamp(48px,6vw,78px); }
+      .hero h1 .red-word { color:#34D399; text-shadow:2px 2px 0 #17324a; }
+      .hero-description { max-width:400px; color:#fff7df; font-size:16px; }
+      .primary-btn { border:0; border-radius:999px; color:#17324a; background:#FACC15; font-weight:700; }
+      .primary-btn:hover { color:#fff; background:#1A73E8; }
+      .play-btn { color:#17324a; font-weight:700; }
+      .play-icon { border:0; color:#17324a; background:#34D399; }
+      .hero-proof { color:#17324a; }
+      .hero-proof small { color:#fff7df; }
+      .hero-visual { z-index:2; transform:rotate(2deg); }
+      .hero-image { border:8px solid #fffaf0; border-radius:26px; box-shadow:12px 18px 0 #17324a; }
+      .hero-visual::after { left:-24px; bottom:3px; width:100px; height:100px; border-color:#FACC15; }
+      .hero-mascot { position:absolute; right:-40px; bottom:-47px; z-index:3; width:122px; height:126px; transform:rotate(-7deg); }
+      .mascot-shadow { position:absolute; left:9px; bottom:0; width:104px; height:22px; border-radius:50%; background:rgba(23,50,74,.25); filter:blur(3px); }
+      .mascot-body { position:absolute; left:16px; bottom:16px; width:82px; height:83px; border:4px solid #17324a; border-radius:50% 50% 43% 43%; background:#34D399; }
+      .mascot-body::before { content:''; position:absolute; left:20px; top:17px; width:10px; height:10px; border-radius:50%; background:#17324a; box-shadow:31px 0 #17324a; }
+      .mascot-body::after { content:''; position:absolute; left:27px; top:35px; width:25px; height:15px; border:3px solid #17324a; border-top:0; border-radius:0 0 20px 20px; }
+      .mascot-beak { position:absolute; left:49px; top:50px; width:0; height:0; border-top:8px solid transparent; border-bottom:8px solid transparent; border-left:22px solid #FACC15; transform:rotate(-8deg); }
+      .mascot-wing { position:absolute; left:6px; top:37px; width:29px; height:38px; border:3px solid #17324a; border-radius:50% 20% 50% 50%; background:#1A73E8; transform:rotate(28deg); }
+      .mascot-scarf { position:absolute; right:14px; bottom:24px; width:48px; height:14px; border:3px solid #17324a; border-radius:12px; background:#EF4444; transform:rotate(7deg); }
+      .search-section { margin-top:-24px; }
+      .search-card { position:relative; z-index:5; min-height:104px; padding:18px 23px; border:4px solid #fffaf0; border-radius:22px; background:#fff; box-shadow:0 17px 32px rgba(23,50,74,.13); }
+      .search-btn { border-radius:16px; }
+      .category-section, .destinations-section, .points-section, .journal-section { padding-top:112px; }
+      .section-heading h2, .rewards-heading h3 { color:#17324a; }
+      .category-grid, .destination-grid, .rewards-grid, .journal-grid { gap:18px; }
+      .category-card, .destination-image, .journal-photo { border-radius:22px; }
+      .category-card { min-height:260px; border:4px solid #fffaf0; box-shadow:0 12px 25px rgba(23,50,74,.1); }
+      .category-card::after { background:linear-gradient(180deg,rgba(23,50,74,.02),rgba(23,50,74,.82)); }
+      .category-card h3 { font-size:30px; }
+      .destination-card { padding:8px; border:1px solid rgba(26,115,232,.14); border-radius:24px; background:#fff; box-shadow:0 10px 22px rgba(23,50,74,.08); }
+      .destination-image { height:295px; }
+      .featured-card .destination-image { height:340px; }
+      .route-section { border-radius:28px; background:#17324a; box-shadow:0 18px 34px rgba(23,50,74,.16); }
+      .route-map { border-radius:0 28px 28px 0; }
+      .points-wallet { border-radius:25px 0 0 25px; background:#1A73E8; }
+      .points-how { border-radius:0 25px 25px 0; background:#fff1b8; }
+      .reward-card { border-radius:22px; }
+      .reward-art { border-radius:22px 22px 0 0; }
+      .newsletter { border-radius:26px; border:4px solid #fff1b8; background:#1A73E8; box-shadow:0 15px 30px rgba(26,115,232,.17); }
+      .site-footer { background:#17324a; }
+      .footer-bottom { border-color:rgba(255,255,255,.2); }
+      .chatbot-launch { border:3px solid #FACC15; background:#1A73E8; }
+      .chatbot-panel { border:3px solid #FACC15; border-radius:22px; }
+      .auth-card { border:4px solid #FACC15; }
+      @media (max-width:850px) {
+        .site-header { width:calc(100% - 24px); padding:0 13px; }
+        .hero { margin-top:14px; padding:42px 28px 48px; }
+        .hero-mascot { right:4px; bottom:-42px; transform:scale(.82) rotate(-7deg); transform-origin:bottom right; }
+        .points-wallet, .points-how { border-radius:24px; }
+        .route-map { border-radius:0 0 28px 28px; }
+      }
+      @media (max-width:520px) {
+        .hero { padding:36px 20px 46px; border-radius:25px; }
+        .hero::before { border-radius:25px; }
+        .hero-image { box-shadow:7px 11px 0 #17324a; }
+        .hero-mascot { right:-3px; bottom:-35px; transform:scale(.62) rotate(-7deg); }
+        .search-card { border-radius:18px; }
+        .category-card { border-radius:19px; }
+      }
+    </style>
+    <style id="city-picker-style">
+      .destination-field { position:relative; z-index:30; }
+      .destination-picker { width:100%; display:flex; justify-content:space-between; align-items:center; padding:0; border:0; outline:0; color:var(--ink); background:transparent; font-size:12px; text-align:left; }
+      .destination-picker b { color:var(--forest); font-size:16px; transition:transform .2s; }
+      .destination-picker[aria-expanded="true"] b { transform:rotate(180deg); }
+      .city-picker { position:absolute; top:calc(100% + 13px); left:15px; right:0; width:min(330px,calc(100vw - 60px)); max-height:300px; overflow:hidden; z-index:40; padding:12px; border:3px solid #17324a; border-radius:18px; background:#fffaf0; box-shadow:6px 7px 0 #FACC15; }
+      .city-picker[hidden] { display:none; }
+      .city-picker > input { width:100%; margin-bottom:9px; padding:10px 11px; border:1px solid rgba(26,115,232,.2); border-radius:10px; outline:none; color:var(--ink); background:white; font-size:11px; }
+      .city-picker > input:focus { border-color:var(--forest); box-shadow:0 0 0 3px rgba(26,115,232,.12); }
+      .city-list { max-height:220px; overflow-y:auto; display:grid; gap:4px; }
+      .city-option { padding:9px 10px; border:0; border-radius:9px; color:var(--ink); background:transparent; font-size:11px; text-align:left; }
+      .city-option:hover, .city-option:focus { color:#17324a; background:#d7f8eb; outline:none; }
+      .city-empty { padding:12px 9px; color:var(--muted); font-size:10px; }
+      .date-field { min-width:160px; }
+      .date-input { width:100%; padding:0; border:0; outline:0; color:var(--ink); background:transparent; font:inherit; font-size:12px; }
+      .date-input::-webkit-calendar-picker-indicator { cursor:pointer; opacity:.75; }
+      .destination-image.image-ybycui { background-image:linear-gradient(180deg,rgba(9,47,37,.02),rgba(9,37,28,.16)),url('./assets/parque-ybycui.png') !important; background-size:cover; background-position:center; }
+      .destination-image.image-nature-teyucuare { background-image:linear-gradient(180deg,rgba(9,47,37,.02),rgba(9,37,28,.2)),url('./assets/category-nature.png') !important; }
+      .destination-image.image-nature-monday, .destination-image.image-nature-iguazu { background-image:linear-gradient(180deg,rgba(9,47,37,.02),rgba(9,37,28,.2)),url('./assets/parque-ybycui.png') !important; }
+      .destination-image.image-nature-cerro, .destination-image.image-nature-sanrafael { background-image:linear-gradient(180deg,rgba(9,47,37,.02),rgba(9,37,28,.2)),url('./assets/viaja-paraguay-hero-new.png') !important; }
+      .destination-image.image-nature-defensores, .destination-image.image-nature-lago { background-image:linear-gradient(180deg,rgba(9,47,37,.02),rgba(9,37,28,.2)),url('./assets/viaja-paraguay-hero.jpg') !important; }
+      .destination-description { margin:0; padding:10px 2px 2px; color:#5f6f7d; font-size:11px; line-height:1.5; }
+      .destination-card { cursor:pointer; transition:transform .2s, box-shadow .2s; }
+      .destination-card:hover { transform:translateY(-4px); box-shadow:0 14px 26px rgba(23,50,74,.14); }
+      .destination-card:focus-visible { outline:3px solid #FACC15; outline-offset:4px; }
+      .map-controls { position:absolute; right:20px; bottom:20px; z-index:3; display:grid; gap:6px; }
+      .map-controls button { width:34px; height:34px; border:2px solid #17324a; border-radius:10px; color:#17324a; background:#fffaf0; font-size:20px; font-weight:700; cursor:pointer; box-shadow:3px 3px 0 #FACC15; }
+      .map-controls button:hover, .map-region-buttons button:hover { color:#fff; background:#1A73E8; }
+      .paraguay-map { transform-origin:center; transition:transform .25s ease; }
+      .paraguay-map .region, .paraguay-map .map-pin { cursor:pointer; transition:filter .2s, opacity .2s; }
+      .paraguay-map .region:hover, .paraguay-map .map-pin:hover { filter:brightness(1.12) drop-shadow(0 3px 3px rgba(23,50,74,.25)); }
+      .map-region-buttons { padding:21px 0; border-bottom:1px solid var(--line); }
+      .map-region-buttons strong { display:block; margin-bottom:10px; font-size:11px; }
+      .map-region-buttons div { display:flex; flex-wrap:wrap; gap:6px; }
+      .map-region-buttons button { padding:7px 10px; border:1px solid rgba(26,115,232,.2); border-radius:999px; color:#17324a; background:#fffaf0; font-size:10px; cursor:pointer; }
+      .map-region-buttons button.active { color:#fff; border-color:#1A73E8; background:#1A73E8; }
+      .developer-only { display:none !important; }
+      body.developer-mode .developer-only { display:inline-flex !important; }
+      .developer-trigger { width:24px; height:24px; margin-left:4px; padding:0; border:0; border-radius:50%; color:rgba(255,255,255,.35); background:transparent; font-size:16px; line-height:10px; cursor:pointer; }
+      .developer-trigger:hover, body.developer-mode .developer-trigger { color:#FACC15; }
+      .food-stories { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:22px; }
+      .food-stories.hidden { display:none; }
+      .food-story { min-height:190px; padding:19px; border:2px solid rgba(26,115,232,.12); border-radius:20px; background:#fff; box-shadow:0 8px 18px rgba(23,50,74,.06); transition:.2s; }
+      .food-story:hover { transform:translateY(-4px); border-color:#34D399; box-shadow:0 13px 23px rgba(23,50,74,.11); }
+      .food-story > span { color:#F97316; font-size:9px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+      .food-story h3 { margin:10px 0 8px; color:#17324a; font-size:20px; line-height:1.05; }
+      .food-story p { min-height:53px; margin:0 0 13px; color:#5f6f7d; font-size:11px; line-height:1.5; }
+      .food-story button { padding:0; border:0; color:#1A73E8; background:transparent; font-size:10px; font-weight:800; cursor:pointer; }
+      @media(max-width:850px) { .food-stories { grid-template-columns:repeat(2,1fr); } }
+      @media(max-width:520px) { .food-stories { grid-template-columns:1fr; } }
+      .map-header-actions { display:flex; align-items:center; gap:10px; }
+      .google-maps-button { display:inline-flex; align-items:center; padding:9px 12px; border:2px solid #1A73E8; border-radius:999px; color:#1A73E8; background:#fff; font-size:10px; font-weight:700; text-decoration:none; }
+      .google-maps-button:hover { color:#fff; background:#1A73E8; }
+      .route-modal[hidden] { display:none; }
+      .route-modal { position:fixed; inset:0; z-index:95; display:grid; place-items:center; padding:20px; }
+      .route-modal-backdrop { position:absolute; inset:0; background:rgba(23,50,74,.62); backdrop-filter:blur(4px); }
+      .route-modal-card { position:relative; z-index:1; width:min(720px,100%); padding:32px; border:4px solid #17324a; border-radius:26px; background:#fffaf0; box-shadow:10px 12px 0 #34D399; }
+      .route-modal-card h2 { margin:8px 0; color:#17324a; font-size:36px; }
+      .route-modal-intro { margin:0 0 20px; color:#5f6f7d; font-size:13px; }
+      .route-options { display:grid; gap:10px; }
+      .route-option { display:grid; grid-template-columns:42px 1fr auto; grid-template-rows:auto auto; gap:3px 11px; padding:15px; border:2px solid rgba(26,115,232,.16); border-radius:16px; color:#17324a; background:#fff; text-align:left; cursor:pointer; transition:.2s; }
+      .route-option:hover, .route-option.selected { border-color:#1A73E8; background:#d7f8eb; transform:translateX(4px); }
+      .route-option-number { grid-row:1 / 3; align-self:center; color:#F97316; font-size:18px; font-weight:800; }
+      .route-option strong { font-size:14px; }
+      .route-option small { color:#5f6f7d; font-size:10px; }
+      .route-option b { grid-column:3; grid-row:1 / 3; align-self:center; color:#1A73E8; font-size:10px; }
+      .route-selection { margin:16px 0 0; padding:12px; border-radius:12px; color:#17324a; background:#fff1b8; font-size:11px; }
+      @media(max-width:600px) { .route-modal-card { padding:25px 18px; } .route-modal-card h2 { font-size:29px; } .route-option { grid-template-columns:34px 1fr; } .route-option b { grid-column:2; grid-row:auto; } }
+      .map-region-buttons p { margin:10px 0 0; color:var(--muted); font-size:10px; line-height:1.4; }
+      .destination-image > img.destination-photo { position:absolute; inset:0; z-index:0; width:100%; height:100%; object-fit:cover; display:block; }
+      .destination-image > .image-overlay, .destination-image > .location-tag, .destination-image > .heart-btn { z-index:2; }
+      .destination-modal[hidden] { display:none; }
+      .destination-modal { position:fixed; inset:0; z-index:100; display:grid; place-items:center; padding:20px; }
+      .destination-modal-backdrop { position:absolute; inset:0; background:rgba(23,50,74,.62); backdrop-filter:blur(4px); }
+      .destination-modal-card { position:relative; z-index:1; width:min(760px,100%); max-height:min(90vh,760px); overflow:auto; border:4px solid #17324a; border-radius:26px; background:#fffaf0; box-shadow:10px 12px 0 #FACC15; }
+      .destination-modal-close { position:absolute; top:12px; right:14px; z-index:3; width:36px; height:36px; border:2px solid #17324a; border-radius:50%; color:#17324a; background:#fffaf0; font-size:25px; line-height:1; cursor:pointer; }
+      .destination-modal-image { width:100%; height:280px; display:block; object-fit:cover; background:#d7f8eb; }
+      .destination-modal-content { padding:24px 28px 30px; }
+      .destination-modal-content .location-tag { position:static; display:inline-block; color:#fff; background:#1A73E8; border:0; border-radius:999px; }
+      .destination-modal-content h2 { margin:12px 0 8px; color:#17324a; font-size:38px; }
+      .destination-modal-content > p { margin:0 0 22px; color:#5f6f7d; font-size:15px; line-height:1.6; }
+      .review-heading { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; color:#17324a; }
+      .review-heading span { color:#5f6f7d; font-size:11px; }
+      .review-list { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+      .review-list article { padding:13px; border:1px solid rgba(26,115,232,.16); border-radius:14px; background:#fff; }
+      .review-list b { color:#F97316; letter-spacing:1px; }
+      .review-list p { margin:8px 0; color:#5f6f7d; font-size:11px; line-height:1.45; }
+      .review-list small { color:#17324a; font-size:9px; }
+      @media(max-width:650px) { .review-list { grid-template-columns:1fr; } .destination-modal-image { height:210px; } .destination-modal-content h2 { font-size:30px; } }
+      @media(max-width:850px) { .city-picker { left:0; } }
+    </style>
+    <style id="brand-identity-v2">
+      :root { --serif:'DM Sans',Arial,sans-serif; --sans:'DM Sans',Arial,sans-serif; }
+      body { background:#f4e3cf; background-image:radial-gradient(rgba(23,50,74,.08) 1px, transparent 1px); background-size:22px 22px; }
+      .brand { color:#171717; font-weight:800; letter-spacing:-.08em; }
+      .brand > span:last-child > span, .auth-brand > span:last-child > span { color:#1A73E8; }
+      .brand-mark span:nth-child(1) { background:#17324a; }
+      .brand-mark span:nth-child(2) { background:#1A73E8; }
+      .brand-mark span:nth-child(3) { background:#F97316; }
+      .hero h1, .section-heading h2, .rewards-heading h3, .auth-copy h2, .route-copy h2 { font-family:var(--sans); font-weight:800; letter-spacing:-.065em; }
+      .hero h1 .red-word { color:#1A73E8; text-shadow:3px 3px 0 #FACC15; }
+      .hero::before { background:#f4e3cf; border:3px solid #17324a; box-shadow:8px 9px 0 #17324a; }
+      .hero { background-image:radial-gradient(circle at 8% 90%,rgba(239,68,68,.22) 0 7px,transparent 8px),radial-gradient(circle at 94% 10%,rgba(26,115,232,.2) 0 5px,transparent 6px); }
+      .hero .eyebrow { color:#17324a; }
+      .hero-description { color:#17324a; font-weight:500; }
+      .hero .primary-btn { color:#17324a; background:#FACC15; border:3px solid #17324a; box-shadow:4px 4px 0 #17324a; }
+      .hero .play-btn { color:#17324a; }
+      .hero-image { border:7px solid #17324a; box-shadow:10px 10px 0 #F97316; }
+      .hero-visual::after { border-color:#EF4444; }
+      .hero-mascot { right:-28px; bottom:-55px; }
+      .mascot-body { border-color:#17324a; background:#d08a54; }
+      .mascot-wing { border-color:#17324a; background:#F97316; }
+      .mascot-beak { border-left-color:#FACC15; }
+      .mascot-scarf { border-color:#17324a; background:#1A73E8; }
+      .search-card { border:3px solid #17324a; box-shadow:6px 7px 0 #FACC15; }
+      .search-btn { border:3px solid #17324a; color:#17324a; background:#FACC15; font-weight:800; }
+      .category-section, .destinations-section, .points-section, .journal-section { position:relative; }
+      .category-section::before, .destinations-section::before, .points-section::before, .journal-section::before { content:'✦'; position:absolute; right:5%; top:48px; color:#EF4444; font-size:28px; transform:rotate(18deg); }
+      .section-heading h2 { font-size:clamp(32px,4vw,52px); }
+      .category-card { border:3px solid #17324a; box-shadow:6px 7px 0 #1A73E8; }
+      .category-card h3 { font-family:var(--sans); font-weight:800; }
+      .destination-card { border:3px solid #17324a; box-shadow:5px 6px 0 #34D399; }
+      .route-section { border:3px solid #17324a; box-shadow:8px 9px 0 #F97316; }
+      .route-copy h2 em { color:#FACC15; }
+      .points-wallet { border:3px solid #17324a; box-shadow:6px 7px 0 #F97316; }
+      .points-how { border:3px solid #17324a; box-shadow:6px 7px 0 #34D399; }
+      .reward-card { border:3px solid #17324a; box-shadow:5px 6px 0 #FACC15; }
+      .newsletter { border:3px solid #17324a; box-shadow:6px 7px 0 #EF4444; }
+      .site-footer { border-top:5px solid #FACC15; }
+      .chatbot-launch { border:3px solid #17324a; box-shadow:5px 5px 0 #FACC15; }
+      .auth-card { border:3px solid #17324a; box-shadow:7px 8px 0 #FACC15; }
+      @media (max-width:520px) {
+        .hero::before { box-shadow:5px 6px 0 #17324a; }
+        .category-section::before, .destinations-section::before, .points-section::before, .journal-section::before { top:28px; right:8%; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="announcement">
+      <span class="announcement-dot"></span>
+      <span>El corazón de Sudamérica tiene una historia para vos.</span>
+      <button class="announcement-link" data-scroll="destinos">Explorá ahora <span>↗</span></button>
+    </div>
+
+    <header class="site-header" id="inicio">
+      <a class="brand" href="#inicio" aria-label="viajaPY, inicio">
+        <span class="brand-mark"><span></span><span></span><span></span></span>
+        <span>viaja<span>PY</span></span>
+      </a>
+      <nav class="desktop-nav" aria-label="Navegación principal">
+        <a class="active" href="#explorar">Explorar</a>
+        <a href="#destinos">Destinos</a>
+        <a href="#rutas">Rutas</a>
+        <a href="#puntos">Puntos</a>
+        <a href="#experiencias">Experiencias</a>
+      </nav>
+      <div class="header-actions">
+        <button class="language-btn" type="button" aria-label="Cambiar idioma">ES <span>⌄</span></button>
+        <button class="login-btn" id="login-button" type="button" data-open-auth="login" aria-haspopup="dialog">Iniciar sesión <span>↗</span></button>
+        <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span></button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero section-shell" id="explorar">
+        <div class="hero-copy">
+          <p class="eyebrow"><span></span> La guía local de Paraguay</p>
+          <h1>¡Explorá y <span class="red-word">descubrí</span> tu país!</h1>
+          <p class="hero-description">Rincones auténticos, sabores que abrazan y aventuras que empiezan a la vuelta de la esquina.</p>
+          <div class="hero-buttons">
+            <button class="primary-btn" data-scroll="destinos">Descubrí tu próxima escapada <span>↗</span></button>
+            <button class="play-btn" type="button" data-toast="Estamos preparando una mini guía audiovisual."><span class="play-icon">▶</span> Ver el video</button>
+          </div>
+          <div class="hero-proof">
+            <div class="avatar-stack" aria-label="Comunidad de viajaPY"><span>LP</span><span>MG</span><span>JS</span><span>+</span></div>
+            <div><strong>+12.000</strong><small>viajeros inspirados</small></div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <img class="hero-image image-hero" src="./assets/viaja-paraguay-hero-new.png" alt="Propuesta estratégica Viaja Paraguay: Reescubriendo nuestra tierra" />
+          <div class="hero-mascot" aria-label="Mascota viajera de viajaPY" role="img">
+            <span class="mascot-shadow"></span><span class="mascot-body"></span><span class="mascot-wing"></span><span class="mascot-beak"></span><span class="mascot-scarf"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="search-section section-shell" aria-label="Buscador de destinos">
+        <div class="search-card">
+          <div class="search-intro"><span class="search-icon">⌕</span><div><strong>¿Qué estás buscando?</strong><small>Encontrá tu próxima historia</small></div></div>
+    <label class="search-field destination-field"><span>Destino</span><button class="destination-picker" id="destination-picker" type="button" aria-expanded="false" aria-controls="city-picker"><span id="destination-value">Elegí una ciudad</span><b>⌄</b></button><div class="city-picker" id="city-picker" hidden><input id="city-filter" type="search" placeholder="Buscar ciudad..." autocomplete="off" /><div class="city-list" id="city-list" role="listbox" aria-label="Ciudades de Paraguay"></div></div><input id="destination-search" type="hidden" /></label>
+          <label class="search-field date-field"><span>¿Cuándo viajás?</span><input class="date-input" id="travel-date" type="date" aria-label="Elegí la fecha de tu viaje" /></label>
+          <button class="search-btn" type="button" id="search-button">Buscar <span>↗</span></button>
+        </div>
+      </section>
+
+      <section class="section-shell category-section" id="experiencias">
+        <div class="section-heading">
+          <div><p class="eyebrow"><span></span> Elegí tu mood</p><h2>Descubrí a tu manera</h2></div>
+          <p class="heading-note">Cada lugar tiene su propio ritmo.<br />Encontrá el tuyo.</p>
+        </div>
+        <div class="category-grid">
+          <button class="category-card category-nature" data-filter="Naturaleza"><div class="category-card-content"><span class="category-number">01</span><h3>Naturaleza</h3><span class="card-link">Ver experiencias <b>↗</b></span></div></button>
+          <button class="category-card category-culture" data-filter="Cultura"><div class="category-card-content"><span class="category-number">02</span><h3>Cultura & sabor</h3><span class="card-link">Ver experiencias <b>↗</b></span></div></button>
+          <button class="category-card category-adventure" data-filter="Aventura"><div class="category-card-content"><span class="category-number">03</span><h3>Aventura</h3><span class="card-link">Ver experiencias <b>↗</b></span></div></button>
+        </div>
+      </section>
+
+      <section class="destinations-section" id="destinos">
+        <div class="section-shell">
+          <div class="section-heading destinations-heading">
+            <div><p class="eyebrow"><span></span> Para empezar a soñar</p><h2>Destinos que hablan por sí solos</h2></div>
+            <button class="text-btn" type="button" data-toast="Pronto vas a poder explorar los 17 departamentos.">Ver todos los destinos <span>↗</span></button>
+          </div>
+          <div class="filter-row" role="group" aria-label="Filtrar destinos">
+            <button class="filter-pill active" data-filter="Todos">Todos</button><button class="filter-pill" data-filter="Naturaleza">Naturaleza</button><button class="filter-pill" data-filter="Cultura">Cultura</button><button class="filter-pill" data-filter="Arte">Arte</button><button class="filter-pill" data-filter="Aventura">Aventura</button>
+          </div>
+          <div class="destination-grid" id="destination-grid">
+            <article class="destination-card featured-card" data-category="Cultura">
+              <div class="destination-image image-misiones"><span class="location-tag">Itapúa</span><button class="heart-btn" type="button" aria-label="Guardar Misiones Jesuíticas">♡</button><div class="image-overlay"><span>01</span><h3>Misiones<br /><em>Jesuíticas</em></h3></div></div>
+              <div class="destination-meta"><span>Cultura · 1 día</span><span class="destination-arrow">↗</span></div><p class="destination-description">Piedras, historia y silencio entre las ruinas que guardan la memoria de las misiones.</p>
+            </article>
+            <article class="destination-card" data-category="Naturaleza">
+              <div class="destination-image image-ybycui"><span class="location-tag">Paraguarí</span><button class="heart-btn" type="button" aria-label="Guardar Parque Ybycuí">♡</button><div class="image-overlay"><span>02</span><h3>Parque<br /><em>Ybycuí</em></h3></div></div>
+              <div class="destination-meta"><span>Naturaleza · 2 días</span><span class="destination-arrow">↗</span></div><p class="destination-description">Senderos verdes, cascadas y aire puro para perderte en el corazón de Paraguarí.</p>
+            </article>
+            <article class="destination-card nature-extra" data-category="Naturaleza"><div class="destination-image image-nature-teyucuare"><span class="location-tag">San Ignacio</span><button class="heart-btn" type="button" aria-label="Guardar Teyú Cuaré">♡</button><div class="image-overlay"><span>04</span><h3>Teyú<br /><em>Cuaré</em></h3></div></div><div class="destination-meta"><span>Naturaleza · 1 día</span><span class="destination-arrow">↗</span></div><p class="destination-description">Barrancas coloradas y miradores sobre el Paraná para una escapada con espíritu aventurero.</p></article>
+            <article class="destination-card nature-extra" data-category="Naturaleza"><div class="destination-image image-nature-monday"><span class="location-tag">Presidente Franco</span><button class="heart-btn" type="button" aria-label="Guardar Saltos del Monday">♡</button><div class="image-overlay"><span>05</span><h3>Saltos del<br /><em>Monday</em></h3></div></div><div class="destination-meta"><span>Naturaleza · 1 día</span><span class="destination-arrow">↗</span></div><p class="destination-description">Una caída de agua imponente entre selva nativa, perfecta para sentir la fuerza del bosque.</p></article>
+            <article class="destination-card nature-extra" data-category="Naturaleza"><div class="destination-image image-nature-iguazu"><span class="location-tag">Alto Paraná</span><button class="heart-btn" type="button" aria-label="Guardar Reserva Natural del Monday">♡</button><div class="image-overlay"><span>06</span><h3>Reserva<br /><em>Natural Monday</em></h3></div></div><div class="destination-meta"><span>Naturaleza · 2 días</span><span class="destination-arrow">↗</span></div><p class="destination-description">Un refugio de biodiversidad donde cada sendero revela sonidos y colores de la selva.</p></article>
+            <article class="destination-card nature-extra" data-category="Naturaleza"><div class="destination-image image-nature-cerro"><span class="location-tag">Cordillera</span><button class="heart-btn" type="button" aria-label="Guardar Cerro Akatí">♡</button><div class="image-overlay"><span>07</span><h3>Cerro<br /><em>Akatí</em></h3></div></div><div class="destination-meta"><span>Naturaleza · 2 días</span><span class="destination-arrow">↗</span></div><p class="destination-description">Altura, neblina y panoramas serranos para contemplar Paraguay desde otra perspectiva.</p></article>
+            <article class="destination-card nature-extra" data-category="Naturaleza"><div class="destination-image image-nature-sanrafael"><span class="location-tag">Itapúa</span><button class="heart-btn" type="button" aria-label="Guardar Parque San Rafael">♡</button><div class="image-overlay"><span>08</span><h3>Parque<br /><em>San Rafael</em></h3></div></div><div class="destination-meta"><span>Naturaleza · 3 días</span><span class="destination-arrow">↗</span></div><p class="destination-description">Bosque atlántico, arroyos y vida silvestre en uno de los tesoros naturales del sur.</p></article>
+            <article class="destination-card nature-extra" data-category="Naturaleza"><div class="destination-image image-nature-defensores"><span class="location-tag">Boquerón</span><button class="heart-btn" type="button" aria-label="Guardar Defensores del Chaco">♡</button><div class="image-overlay"><span>09</span><h3>Defensores<br /><em>del Chaco</em></h3></div></div><div class="destination-meta"><span>Naturaleza · 4 días</span><span class="destination-arrow">↗</span></div><p class="destination-description">El gran Chaco paraguayo en estado puro: horizonte abierto, fauna y aventura inolvidable.</p></article>
+            <article class="destination-card nature-extra" data-category="Naturaleza"><div class="destination-image image-nature-lago"><span class="location-tag">Cordillera</span><button class="heart-btn" type="button" aria-label="Guardar Lago Ypacaraí">♡</button><div class="image-overlay"><span>10</span><h3>Lago<br /><em>Ypacaraí</em></h3></div></div><div class="destination-meta"><span>Naturaleza · 1 día</span><span class="destination-arrow">↗</span></div><p class="destination-description">Atardeceres dorados, pueblos con encanto y una pausa tranquila junto al lago.</p></article>
+            <article class="destination-card adventure-extra" data-category="Aventura"><div class="destination-image image-adventure-treskandu"><span class="location-tag">Guairá</span><button class="heart-btn" type="button" aria-label="Guardar Cerro Tres Kandú">♡</button><div class="image-overlay"><span>11</span><h3>Cerro Tres<br /><em>Kandú</em></h3></div></div><div class="destination-meta"><span>Aventura · 2 días</span><span class="destination-arrow">↗</span></div><p class="destination-description">La cima más alta del Paraguay para caminar entre montes, esfuerzo y vistas enormes.</p></article>
+            <article class="destination-card adventure-extra" data-category="Aventura"><div class="destination-image image-adventure-mbaracayu"><span class="location-tag">Canindeyú</span><button class="heart-btn" type="button" aria-label="Guardar Reserva Mbaracayú">♡</button><div class="image-overlay"><span>12</span><h3>Reserva<br /><em>Mbaracayú</em></h3></div></div><div class="destination-meta"><span>Aventura · 3 días</span><span class="destination-arrow">↗</span></div><p class="destination-description">Selva, senderos y fauna nativa para explorar uno de los grandes refugios verdes del país.</p></article>
+            <article class="destination-card adventure-extra" data-category="Aventura"><div class="destination-image image-adventure-nyacunday"><span class="location-tag">Alto Paraná</span><button class="heart-btn" type="button" aria-label="Guardar Parque Ñacunday">♡</button><div class="image-overlay"><span>13</span><h3>Parque<br /><em>Ñacunday</em></h3></div></div><div class="destination-meta"><span>Aventura · 2 días</span><span class="destination-arrow">↗</span></div><p class="destination-description">Cascadas, bosque atlántico y caminos para descubrir la fuerza del agua en la frontera este.</p></article>
+            <article class="destination-card adventure-extra" data-category="Aventura"><div class="destination-image image-adventure-salto"><span class="location-tag">Caazapá</span><button class="heart-btn" type="button" aria-label="Guardar Salto Suizo">♡</button><div class="image-overlay"><span>14</span><h3>Salto<br /><em>Suizo</em></h3></div></div><div class="destination-meta"><span>Aventura · 1 día</span><span class="destination-arrow">↗</span></div><p class="destination-description">Una escapada entre rocas y agua cristalina para refrescarte y salir de la rutina.</p></article>
+            <article class="destination-card" data-category="Arte">
+              <div class="destination-image image-aregua"><span class="location-tag">Central</span><button class="heart-btn" type="button" aria-label="Guardar Cerámica de Areguá">♡</button><div class="image-overlay"><span>03</span><h3>Cerámica<br /><em>de Areguá</em></h3></div></div>
+              <div class="destination-meta"><span>Arte · 1 día</span><span class="destination-arrow">↗</span></div><p class="destination-description">Colores, barro y tradición en un paseo para conocer el arte que nace en las manos de Areguá.</p>
+            </article>
+          </div>
+          <p class="empty-state" id="empty-state">No encontramos ese destino todavía. Probá con otra palabra.</p>
+        </div>
+      </section>
+
+      <section class="route-section section-shell" id="rutas">
+        <div class="route-copy"><p class="eyebrow light"><span></span> Armá tu propia historia</p><h2>Un mapa no es un plan.<br /><em>Tu curiosidad sí.</em></h2><p>Elegí una región, mezclá experiencias y dejá que el camino te sorprenda.</p><button class="outline-btn" id="create-route-button" type="button">Crear mi ruta <span>↗</span></button></div>
+        <div class="route-map" aria-label="Ruta sugerida por Paraguay">
+          <div class="map-grid"></div><button class="my-map-button" id="my-map-button" type="button">Mi mapa <span>↗</span></button><span class="map-label label-asuncion">Asunción</span><span class="map-label label-encarnacion">Encarnación</span><span class="map-label label-ciudad">C. del Este</span><span class="map-label label-chaco">Chaco</span><svg class="route-line" viewBox="0 0 510 330" fill="none" aria-hidden="true"><path d="M140 265 C185 240 176 170 231 183 C292 197 280 96 347 110 C389 118 375 57 430 50" stroke="#d8eb7c" stroke-width="3" stroke-dasharray="8 9"/><circle cx="140" cy="265" r="7" fill="#d8eb7c"/><circle cx="231" cy="183" r="7" fill="#d8eb7c"/><circle cx="347" cy="110" r="7" fill="#d8eb7c"/><circle cx="430" cy="50" r="7" fill="#d8eb7c"/></svg><div class="route-note"><span>✦</span><strong>Ruta del<br />agua y la tierra</strong><small>7 días · 4 paradas</small></div>
+        </div>
+      </section>
+
+      <div class="route-modal" id="route-modal" hidden><div class="route-modal-backdrop" data-close-route></div><section class="route-modal-card" role="dialog" aria-modal="true" aria-labelledby="route-modal-title"><button class="map-close" id="route-modal-close" type="button" aria-label="Cerrar rutas">×</button><p class="eyebrow"><span></span> Rutas provisionales</p><h2 id="route-modal-title">Elegí tu próxima aventura</h2><p class="route-modal-intro">Probá una de estas combinaciones y empezá a desbloquear Paraguay.</p><div class="route-options"><button type="button" class="route-option" data-route="Ruta del agua"><span class="route-option-number">01</span><strong>Ruta del agua</strong><small>Asunción · Ypacaraí · Ybycuí</small><b>2 días · Naturaleza ↗</b></button><button type="button" class="route-option" data-route="Ruta de la tierra roja"><span class="route-option-number">02</span><strong>Ruta de la tierra roja</strong><small>Encarnación · Misiones · Teyú Cuaré</small><b>3 días · Cultura + naturaleza ↗</b></button><button type="button" class="route-option" data-route="Ruta de la selva"><span class="route-option-number">03</span><strong>Ruta de la selva</strong><small>Ciudad del Este · Monday · San Rafael</small><b>4 días · Aventura ↗</b></button></div><p class="route-selection" id="route-selection" aria-live="polite">Seleccioná una ruta para comenzar.</p></section></div>
+
+      <div class="map-modal" id="my-map-modal" hidden>
+        <div class="map-modal-backdrop" data-close-map></div>
+        <section class="map-modal-card" role="dialog" aria-modal="true" aria-labelledby="map-modal-title">
+          <div class="map-modal-header"><div><p class="eyebrow"><span></span> Tu progreso de explorador</p><h2 id="map-modal-title">Mi mapa</h2><p>El Paraguay que ya conocés y el que todavía te espera.</p></div><div class="map-header-actions"><a class="google-maps-button" href="https://www.google.com/maps/search/?api=1&query=Paraguay" target="_blank" rel="noopener noreferrer">Abrir Google Maps ↗</a><button class="map-close" id="map-close" type="button" aria-label="Cerrar Mi mapa">×</button></div></div>
+          <div class="map-modal-layout">
+            <div class="paraguay-map-wrap">
+              <div class="map-progress"><strong>24%</strong><span>del país explorado</span><div><i></i></div></div>
+              <div class="map-controls" aria-label="Controles del mapa"><button type="button" data-map-action="zoom-in" aria-label="Acercar mapa">+</button><button type="button" data-map-action="zoom-out" aria-label="Alejar mapa">−</button><button type="button" data-map-action="reset" aria-label="Restablecer mapa">⌂</button></div>
+              <svg class="paraguay-map" viewBox="0 0 340 360" role="img" aria-label="Mapa de Paraguay con zonas desbloqueadas y bloqueadas">
+                <defs><filter id="map-shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="7" stdDeviation="5" flood-color="#0c3026" flood-opacity=".22" /></filter></defs>
+                <path class="country-base" filter="url(#map-shadow)" d="M139 22 190 40 224 78 215 111 239 139 224 178 235 211 207 244 215 282 186 314 148 304 119 326 87 307 65 274 34 254 43 219 25 188 42 155 34 123 55 93 49 62 82 54 103 27Z" />
+                <path class="region region-locked" d="M139 22 190 40 224 78 215 111 172 105 144 125 110 105 113 72Z" /><path class="region region-unlocked" d="m110 105 34 20 28-20 43 6 24 28-15 39-40-3-25 25-39-11-30-34 17-30Z" /><path class="region region-locked" d="m90 155 30 34 39 11 25-25 40 3 11 33-28 33 8 38-29 32-38-10-29 22-32-19-22-33-31-20 9-35-18-31 17-33Z" />
+                <path class="map-route" d="M109 254 C91 226 118 198 145 178 C168 160 176 132 193 110" /><path class="map-route soft" d="M109 254 C142 275 168 270 193 246 C211 228 217 201 214 176" />
+                <g class="map-pin unlocked" transform="translate(109 254)"><circle r="8"/><circle class="pin-core" r="3"/></g><g class="map-pin unlocked" transform="translate(145 178)"><circle r="8"/><circle class="pin-core" r="3"/></g><g class="map-pin unlocked" transform="translate(193 110)"><circle r="8"/><circle class="pin-core" r="3"/></g><g class="map-pin locked" transform="translate(214 176)"><circle r="8"/><path d="M-3 0h6M0-3v6"/></g>
+                <text class="map-place" x="80" y="273">Encarnación</text><text class="map-place" x="121" y="165">Ybycuí</text><text class="map-place" x="198" y="96">Asunción</text><text class="map-place muted" x="219" y="193">C. del Este</text>
+              </svg>
+            </div>
+            <div class="map-modal-info"><div class="map-stat-grid"><div><strong id="map-unlocked-count">4</strong><span>lugares<br />desbloqueados</span></div><div><strong>13</strong><span>zonas<br />por descubrir</span></div></div><div class="map-legend"><strong>Estado del mapa</strong><span><i class="legend-dot unlocked-dot"></i>Explorado</span><span><i class="legend-dot route-dot"></i>En tu ruta</span><span><i class="legend-dot locked-dot"></i>Bloqueado</span></div><div class="map-region-buttons"><strong>Explorá una región</strong><div><button type="button" data-map-region="Norte">Norte</button><button type="button" data-map-region="Centro">Centro</button><button type="button" data-map-region="Este">Este</button><button type="button" data-map-region="Chaco">Chaco</button></div><p id="map-region-status">Tocá una zona del mapa para conocerla.</p></div><div class="map-next"><span>✦</span><div><strong>Próximo desafío</strong><p>Completá 2 destinos más para desbloquear la región Este.</p><button type="button" data-close-map>Explorar destinos <b>↗</b></button></div></div></div>
+          </div>
+        </section>
+      </div>
+
+      <section class="points-section section-shell" id="puntos">
+        <div class="section-heading points-heading"><div><p class="eyebrow"><span></span> Club viajaPY</p><h2>Cada viaje <em>suma.</em></h2></div><p class="heading-note">Viajá, descubrí y canjeá beneficios<br />en lugares que comparten tu camino.</p></div>
+        <div class="points-layout">
+          <div class="points-wallet">
+            <div class="wallet-top"><span>Tu saldo</span><span class="wallet-status"><i></i> Explorador nivel 2</span></div>
+            <div class="wallet-balance"><strong id="points-balance">40</strong><span>puntos<br />disponibles</span></div>
+            <div class="wallet-progress"><span><b id="points-next">10</b> pts para tu próxima recompensa</span><div><i id="points-progress"></i></div></div>
+            <button class="points-add developer-only" id="add-trip-button" type="button"><span class="trip-icon">✦</span> Registrar viaje <b>+10 pts ↗</b></button>
+          </div>
+          <div class="points-how"><span class="how-label">¿Cómo sumás?</span><div class="how-row"><span class="how-icon">01</span><div><strong>Completá un viaje</strong><small>Cada viaje terminado suma <b>+10 puntos</b></small></div></div><div class="how-row"><span class="how-icon">02</span><div><strong>Descubrí nuevos lugares</strong><small>Explorá destinos para desbloquear medallas</small></div></div><div class="how-row"><span class="how-icon">03</span><div><strong>Canjeá tus beneficios</strong><small>Usá tus puntos en comercios aliados</small></div></div></div>
+        </div>
+        <div class="rewards-heading"><div><p class="eyebrow"><span></span> Beneficios para vos</p><h3>Canjeá tus puntos en el camino</h3></div><span class="rewards-note">Nuevas promos cada mes · <b>Ver todas ↗</b></span></div>
+        <div class="rewards-grid">
+          <article class="reward-card reward-bar"><div class="reward-art"><span class="reward-type">Bares</span><span class="reward-symbol">◒</span><span class="reward-location">Asunción · Villa Morra</span></div><div class="reward-info"><div><span>Tu próxima ronda</span><h4>2x1 en tragos de autor</h4></div><strong>20 <small>pts</small></strong><button type="button" class="redeem-button" data-redeem="20" data-reward="2x1 en tragos de autor">Canjear <span>↗</span></button></div></article>
+          <article class="reward-card reward-hotel"><div class="reward-art"><span class="reward-type">Hoteles</span><span class="reward-symbol">⌂</span><span class="reward-location">San Bernardino · Lago</span></div><div class="reward-info"><div><span>Una pausa merecida</span><h4>10% off en tu estadía</h4></div><strong>30 <small>pts</small></strong><button type="button" class="redeem-button" data-redeem="30" data-reward="10% off en tu estadía">Canjear <span>↗</span></button></div></article>
+          <article class="reward-card reward-food"><div class="reward-art"><span class="reward-type">Gastronomía</span><span class="reward-symbol">✣</span><span class="reward-location">Areguá · Centro</span></div><div class="reward-info"><div><span>Sabores locales</span><h4>Combo viajero para compartir</h4></div><strong>50 <small>pts</small></strong><button type="button" class="redeem-button" data-redeem="50" data-reward="Combo viajero para compartir">Canjear <span>↗</span></button></div></article>
+        </div>
+      </section>
+
+      <section class="journal-section section-shell" id="historias">
+        <div class="section-heading"><div><p class="eyebrow"><span></span> Bitácora viajaPY</p><h2>Historias para llevarte</h2></div><button class="text-btn" type="button" data-toast="Estamos preparando nuevas historias locales.">Leer el journal <span>↗</span></button></div>
+        <div class="journal-grid"><article class="journal-card journal-large"><div class="journal-photo image-food"></div><div class="journal-content"><span>Sabores</span><h3>La mesa paraguaya se sirve sin apuro</h3><p>Entre chipá, sopa y tereré, hay una forma distinta de conocer un lugar.</p><a href="#" data-toast="La nota completa llega muy pronto.">Leer historia <span>↗</span></a></div></article><article class="journal-card"><div class="journal-photo image-ceramic"></div><div class="journal-content"><span>Oficios</span><h3>Las manos detrás de la arcilla</h3><a href="#" data-toast="La nota completa llega muy pronto.">Leer historia <span>↗</span></a></div></article><article class="journal-card"><div class="journal-photo image-sunset"></div><div class="journal-content"><span>Escapadas</span><h3>Una tarde dorada en San Bernardino</h3><a href="#" data-toast="La nota completa llega muy pronto.">Leer historia <span>↗</span></a></div></article></div>
+        <div class="food-stories" aria-label="Historias de comidas paraguayas"><article class="food-story"><span>01 · Tradición</span><h3>La chipa que acompaña cada camino</h3><p>Una rosca dorada de almidón, queso y memoria familiar, ideal para compartir con un cocido.</p><button type="button" data-toast="Historia de la chipa: una tradición paraguaya que se disfruta todo el año.">Leer historia ↗</button></article><article class="food-story"><span>02 · Merienda</span><h3>Mbejú: crujiente por fuera, hogar por dentro</h3><p>Almidón, queso y sartén: una receta simple que transforma una pausa en un momento especial.</p><button type="button" data-toast="Historia del mbejú: sabor de mandioca y queso en cada bocado.">Leer historia ↗</button></article><article class="food-story"><span>03 · Fiestas</span><h3>Chipa so’o, un corazón de carne</h3><p>La versión rellena de la chipa convierte una merienda tradicional en una experiencia completa.</p><button type="button" data-toast="Historia de la chipa so’o: una receta rellena que reúne a la familia.">Leer historia ↗</button></article><article class="food-story"><span>04 · Maíz</span><h3>Chipa guasu y el sabor de la cosecha</h3><p>Maíz fresco, queso y textura húmeda: una preparación que tiene gusto a encuentro.</p><button type="button" data-toast="Historia de la chipa guasu: maíz y queso en una receta emblemática.">Leer historia ↗</button></article><article class="food-story"><span>05 · Cocina casera</span><h3>Vori vori para entrar en calor</h3><p>Un caldo reconfortante con bolitas de maíz y queso que cuenta una historia de cocina guaraní.</p><button type="button" data-toast="Historia del vori vori: una de las comidas más representativas de Paraguay.">Leer historia ↗</button></article><article class="food-story"><span>06 · San Juan</span><h3>Payaguá mascada y pastel mandi’o</h3><p>Dos clásicos de las fiestas y las calles paraguayas, con mandioca, carne y mucho sabor.</p><button type="button" data-toast="Historia de los sabores de San Juan: tradición, calle y encuentro.">Leer historia ↗</button></article></div>
+      </section>
+
+      <section class="newsletter section-shell"><div class="newsletter-icon">✦</div><div><p class="eyebrow">Una dosis de inspiración</p><h2>Paraguay, directo a tu inbox.</h2><p>Rutas secretas, lugares nuevos y buenas historias. Sin spam, prometido.</p></div><form class="newsletter-form" id="newsletter-form"><label><span class="sr-only">Tu email</span><input type="email" placeholder="Tu mejor email" required /></label><button class="primary-btn" type="submit">Suscribirme <span>↗</span></button></form></section>
+    </main>
+
+    <footer class="site-footer"><div class="section-shell footer-grid"><div><a class="brand footer-brand" href="#inicio"><span class="brand-mark"><span></span><span></span><span></span></span><span>viaja<span>PY</span></span></a><p>Una invitación a mirar Paraguay<br />con ojos nuevos.</p></div><div class="footer-links"><div><strong>Explorá</strong><a href="#destinos">Destinos</a><a href="#rutas">Rutas</a><a href="#experiencias">Experiencias</a></div><div><strong>Conocenos</strong><a href="#inicio">Nuestra historia</a><a href="#inicio">Para negocios</a><a href="#inicio">Contacto</a></div><div><strong>Seguinos</strong><a href="#inicio">Instagram ↗</a><a href="#inicio">TikTok ↗</a><a href="#inicio">YouTube ↗</a></div></div></div><div class="section-shell footer-bottom"><span>© 2024 viajaPY</span><span>Hecho con cariño desde Paraguay <span class="heart">♥</span></span><span>Privacidad · Términos</span><button class="developer-trigger" id="developer-trigger" type="button" aria-label="Activar modo demostración">•</button></div></footer>
+    <aside class="chatbot-shell" id="chatbot" aria-label="Asistente de ViajaPy">
+      <div class="chatbot-panel" id="chatbot-panel" aria-hidden="true">
+        <div class="chatbot-header">
+          <div class="bot-avatar">✦</div>
+          <div><strong>Guía viajaPY</strong><span><i></i> En línea · te acompaño</span></div>
+          <button class="chatbot-close" id="chatbot-close" type="button" aria-label="Cerrar asistente">×</button>
+        </div>
+        <div class="chatbot-body" id="chatbot-body">
+          <div class="bot-message">¡Hola! Soy tu guía local. ¿Qué tipo de aventura te gustaría descubrir?</div>
+          <div class="chat-suggestions"><button type="button" data-chat="Quiero una ruta de naturaleza">Naturaleza</button><button type="button" data-chat="Quiero conocer la cultura">Cultura</button><button type="button" data-chat="Tengo un fin de semana libre">Escapada de finde</button></div>
+        </div>
+        <form class="chatbot-form" id="chatbot-form"><input id="chatbot-input" type="text" placeholder="Escribí tu pregunta..." autocomplete="off" /><button type="submit" aria-label="Enviar mensaje">↑</button></form>
+      </div>
+      <button class="chatbot-launch" id="chatbot-launch" type="button" aria-expanded="false"><span class="chatbot-pulse"></span><span class="chat-label">Preguntale a la guía</span><span class="chat-icon">✦</span></button>
+    </aside>
+    <div class="auth-modal" id="auth-modal" hidden>
+      <div class="auth-backdrop" data-close-auth></div>
+      <section class="auth-card" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+        <button class="auth-close" id="auth-close" type="button" data-close-auth aria-label="Cerrar ventana de acceso">×</button>
+        <div class="auth-brand"><span class="brand-mark"><span></span><span></span><span></span></span><span>viaja<span>PY</span></span></div>
+        <div class="auth-copy">
+          <p class="eyebrow"><span></span> Tu próxima historia empieza acá</p>
+          <h2 id="auth-title">Bienvenido de vuelta</h2>
+          <p id="auth-subtitle">Entrá para guardar destinos, sumar puntos y continuar tu mapa.</p>
+        </div>
+        <div class="auth-tabs" role="tablist" aria-label="Acceso a tu cuenta">
+          <button class="auth-tab active" type="button" data-auth-tab="login" role="tab" aria-selected="true">Iniciar sesión</button>
+          <button class="auth-tab" type="button" data-auth-tab="register" role="tab" aria-selected="false">Crear cuenta</button>
+        </div>
+        <form class="auth-form" id="login-form" data-auth-form="login">
+          <label>Correo electrónico<input type="email" name="email" placeholder="vos@ejemplo.com" autocomplete="email" required /></label>
+          <label>Contraseña<input type="password" name="password" placeholder="••••••••" autocomplete="current-password" minlength="6" required /></label>
+          <div class="auth-options"><label class="check-label"><input type="checkbox" name="remember" /> Recordarme</label><button class="auth-link" type="button" data-toast="Podés recuperar tu contraseña cuando conectemos tu cuenta.">¿Olvidaste tu contraseña?</button></div>
+          <button class="auth-submit" type="submit">Entrar a viajaPY <span>↗</span></button>
+          <div class="auth-divider"><span>o continuá con</span></div>
+          <button class="social-btn" type="button" data-social="Google"><span>G</span> Google</button>
+          <p class="auth-switch">¿Todavía no tenés cuenta? <button type="button" data-auth-tab="register">Registrate gratis</button></p>
+        </form>
+        <form class="auth-form auth-hidden" id="register-form" data-auth-form="register">
+          <label>¿Cómo te llamás?<input type="text" name="name" placeholder="Tu nombre" autocomplete="name" required /></label>
+          <label>Correo electrónico<input type="email" name="email" placeholder="vos@ejemplo.com" autocomplete="email" required /></label>
+          <label>Contraseña<input type="password" name="password" placeholder="Mínimo 6 caracteres" autocomplete="new-password" minlength="6" required /></label>
+          <label class="check-label terms-check"><input type="checkbox" required /> Acepto los términos de viajaPY</label>
+          <button class="auth-submit" type="submit">Crear mi cuenta <span>↗</span></button>
+          <p class="auth-switch">¿Ya tenés una cuenta? <button type="button" data-auth-tab="login">Iniciá sesión</button></p>
+        </form>
+      </section>
+    </div>
+    <div class="destination-modal" id="destination-modal" hidden>
+      <div class="destination-modal-backdrop" data-close-destination></div>
+      <section class="destination-modal-card" role="dialog" aria-modal="true" aria-labelledby="destination-modal-title">
+        <button class="destination-modal-close" id="destination-modal-close" type="button" aria-label="Cerrar destino">×</button>
+        <img id="destination-modal-image" class="destination-modal-image" alt="" />
+        <div class="destination-modal-content"><span class="location-tag" id="destination-modal-location"></span><h2 id="destination-modal-title"></h2><p id="destination-modal-description"></p><div class="review-heading"><strong>Lo que dicen otros viajeros</strong><span>3 reseñas</span></div><div class="review-list"><article><b>★☆☆☆☆</b><p>“El acceso puede ser complicado y faltan algunas indicaciones.”</p><small>— Carla, experiencia reciente</small></article><article><b>★★★☆☆</b><p>“Hermoso lugar, aunque conviene ir con tiempo para recorrerlo.”</p><small>— Diego, viajero frecuente</small></article><article><b>★★★★★</b><p>“Una experiencia inolvidable. La naturaleza y el paisaje superaron mis expectativas.”</p><small>— Sofía, exploradora viajaPY</small></article></div></div>
+      </section>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="./app.js?v=developer-access"></script>
+  </body>
+</html>
